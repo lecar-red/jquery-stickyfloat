@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Floating sidebar</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery.stickyfloat.js"></script>
+
+  <link type="text/css" rel="stylesheet" media="all" href="css/style.css" />
+
+  <script type="text/javascript">
+    $(function() {
+        $('.stickyfloat').each( function() { $(this).stickyfloat({ duration: 100 }) });
+    });
+  </script>
+
+  <!--
+  blog: http://designwoop.com/2011/01/how-to-create-a-jquery-sticky-sidebar/
+  from: http://designwoop.com/wp-content/uploads/stickysidebar/floating_sidebar.html
+   -->
+</head>
+
+<body> 
+  <div class="header">
+    <div class="stickyfloat bar">Header (constrained)</div>
+    jQuery - stickyfloat
+  </div>
+        
+  <div class="content">
+
+    <div class="stickyfloat" id="menu">
+      Archives <br />
+      <em>constrainted to content</em>
+    </div>
+
+    <div class="text">
+
+      <h1>Smart sticky floating box</h1>
+
+      <p><strong>Scroll down, the 'archives' sidebar will follow!</strong></p>
+      <p> See other white boxes that will float as you scroll but are constrained in parent div</p>
+
+      <p>Want your box to float beside you as you scroll, but ONLY in a specific constrained area? or only on it's parents area? - you got it.</p>
+
+      <ul>
+        <li>Extremely useful for side-menus</li>
+        <li>All in one vertical floating solution</li>
+      </ul>
+
+      <div>
+        <div class="stickyfloat bar">Params header</div>
+
+        <h2>Parameters:</h2>
+
+        <ul>
+          <li>duration - the duration of the animation</li>
+          <li>tartOffset - the amount of scroll offset after it the animations kicks in</li>
+          <li>offsetY - the offset from the top when the object is animated</li>
+          <li>lockBottom - 'true' by default, set to false if you don't want your floating box to stop at parent's bottom</li>
+        </ul>
+      </div>
+
+      <h2>Example:</h2>
+
+      <pre>jQuery('#menu').stickyfloat({duration: 400});</pre>  
+      or
+      <pre>$('.stickfloat').stickyfloat();</pre>
+
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="http://designwoop.com/2011/01/how-to-create-a-jquery-sticky-sidebar/">Design Woop</a></li>Great Blog Entry (this demo is hacked from there)</li>
+        <li><a href="https://gist.github.com/728487">Previous Gist version</a></li>
+        <li><a href="https://github.com/lecar-red/jquery-stickyfloat">Github</a></li>
+        <li><a href="http://jquery.com">jQuery</a></li>
+      </ul>
+
+    </div>
+
+    <div class="footer">
+      Footer
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+   jQuery - stickyfloat 
+
+   Smart sticky floating box
+   =========================
+
+   Want your box to float beside you as you scroll, but ONLY in a
+   specific constrained area? or only on it's parents area? - you got it.
+
+     * Extremely useful for side-menus
+
+     * All in one vertical floating solution
+
+   Parameters:
+   -----------
+
+     * duration - the duration of the animation
+
+     * tartOffset - the amount of scroll offset after it the animations
+       kicks in
+
+     * offsetY - the offset from the top when the object is animated
+
+     * lockBottom - 'true' by default, set to false if you don't want
+       your floating box to stop at parent's bottom
+
+   Example:
+   --------
+
+   jQuery('#menu').stickyfloat({duration: 400});   
+
+   or
+
+   $('.stickfloat').stickyfloat();   
+
+
+   Resources
+
+     * [1]Design Woop
+
+     Great Blog Entry (this demo is hacked from there) * [2]Previous Gist
+       version
+
+     * [3]Github
+
+     * [4]jQuery
+
+   Footer
+
+   
+   1. http://designwoop.com/2011/01/how-to-create-a-jquery-sticky-sidebar/
+   2. https://gist.github.com/728487
+   3. https://github.com/lecar-red/jquery-stickyfloat
+   4. http://jquery.com
+

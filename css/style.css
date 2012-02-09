@@ -1,0 +1,11 @@
+		 body { margin:0; padding:0; background:url(../img/bg.jpg); font-family:Georgia, "Times New Roman", Times, serif}
+		.header{ height:auto; width:900px; text-align:center; color:#fff; font-size:5em; margin:0 auto; }
+		.content{width:900px; margin:0 auto; position:relative;}
+		.content .text{ height:2000px; margin-left:250px; text-align:left; padding:10px; color:#fff; font-size:1.2em;}
+		.content a{color:#fff;}
+		.content a:hover{color:#f3f3f3; text-decoration:underline;}
+		.content #menu{ position:absolute; border:solid 1px #484949; left:10px; margin:10px 0 0 0; width:240px; height:250px; text-align:center; color:#fff; font-size:1.5em;}
+		.footer{height:100px; text-align:center; color:#fff; font-size:3em;}
+		.italic{font-style:italic;}
+
+.bar { background-color: white; color: black; height 20px; text-align: center; font-family: 'Arial', sans-serif; font-size: .50em; letter-spacing: 0; }
