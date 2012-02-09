@@ -37,12 +37,15 @@
 
      * [1]Design Woop
 
-     Great Blog Entry (this demo is hacked from there) * [2]Previous Gist
-       version
+     Great Blog Entry (this demo is hacked from there) 
+
+     * [2]Previous Gist version
 
      * [3]Github
 
      * [4]jQuery
+
+     * [5] Orignal Plugin page (not working for me)
 
    Footer
 
@@ -51,4 +54,4 @@
    2. https://gist.github.com/728487
    3. https://github.com/lecar-red/jquery-stickyfloat
    4. http://jquery.com
-
+   5. http://archive.plugins.jquery.com/project/stickyfloat
