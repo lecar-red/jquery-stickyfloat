@@ -21,12 +21,10 @@
  */
 ( function($) {
 	$.fn.stickyfloat = function(options) {
-		return this.each( function() { 
-			var p = $(this).parent();
-
+		return this.each( function() {
 			// we check each parent for overflow to find valid option to use
 			// for positioning, need better name than base
-			var base = p.parents().map( function() {
+			var base = $(this).parents().map( function() {
 				if ( $(this).css('overflow') == 'scroll' || 
 					 $(this).css('overflow') == 'auto' ) {
 					return this;
@@ -88,26 +86,94 @@
 		}; // end calc
 
 		// position when float is inside of overflow with scroll 
+		// p - overflow element (not parent) need to change
 		function _position_overflow($obj, options, p) {
 			// var par              = $obj.parent();
 			// not sure about this yet, if we are inside div > div > div
 			var parentPaddingTop = parseInt( $obj.parent().css('padding-top') );
-			var startOffset      = $obj.parent().offset().top;
-			var opts             = $.extend({
+			
+			// offset is relative to document not current element
+			//var startOffset      = p.offset().top - $obj.parent().offset().top;
+			var startOffset      = $obj.parent().offset().top - p.offset().top;
+
+			// set defaults and overrides
+			var opts = $.extend({
 				startOffset: startOffset, 
 				offsetY:     parentPaddingTop, 
 				duration:    400, 
-				lockBottom:  true 
+				lockBottom:  true
 			}, options);
 
 			$obj.css({ position: 'relative' });
 
-			$(p).scroll(function() {
-				var newpos = $(this).scrollTop() + opts.offsetY;
+			if(opts.lockBottom) {
+				// get the maximum scrollTop value but using scrollHeight 
+				// (for overflow elements)
+				var bottomPos = 
+					$obj.parent().prop('scrollHeight') - $obj.height() + opts.offsetY; 
 
-				$obj.stop(); 
+				_emit_log("bottomPos [" + $obj.attr('id') + "]: " + bottomPos );
+
+				if( bottomPos < 0 )
+					bottomPos = 0;
+			}
+
+			// scroll attached to overflow element
+			$(p).scroll(function() {
+				var msg = "[" + $obj.attr('id') + "]: ";
+
+				// ** These don't appear to be needed inside scrolling overflow **
+				// check if the overflow element was scrolled down more 
+				// than the start offset declared.
+				var pastStartOffset     = $(this).scrollTop() > opts.startOffset; 
+
+				// check if the object is at it's top position (starting point)
+				var objFartherThanTopPos  = $obj.offset().top > opts.startOffset; 
+
+				// scrollTop isn't completely correct here
+				// newpos will be need to take into account 
+				var newpos = $(this).scrollTop() - opts.startOffset + opts.offsetY;
+
+				_emit_log( 
+					msg + 
+					"scrollTop: "   + $(this).scrollTop() + " " +
+					"startOffset: " + opts.startOffset    + " " +
+					"offsetY: "     + opts.offsetY        + " " +
+					"newpos:  "     + newpos    + " " +
+					"bottomPos: "   + bottomPos + " "
+				); 
+
+				// stop scroll at bottom of parent
+				if ( newpos > bottomPos )
+					newpos = bottomPos; 
+
+				if ( $(this).scrollTop() < opts.startOffset )
+					newpos = opts.offsetY;
+
+				$obj.stop();
+
+				if ( newpos < 0 ) 
+					newpos = 0;
+
+				// nothing to do here
+				//if ( !pastStartOffset && !objFartherThanTopPos ) 
+				//	return;
+
+				// move until obj is outside of parent size, then stop
+				_emit_log( 
+					msg + 
+					"scrollTop: " + $(this).scrollTop() + " " + 
+					"header + div size: " + ( $obj.parent().height() - $obj.height() ) + " " +
+					"newpos: " + newpos
+				);
+
 				$obj.animate({ top: newpos }, opts.duration );
 			});
-		}
+		};
+
+		function _emit_log(msg) {
+			if ( console.log && window.debug ) 
+				console.log(msg);
+		};
 	};
 })(jQuery);

@@ -10,6 +10,9 @@
 
      * All in one vertical floating solution
 
+   Also supports sticky header inside divs with overflow of scroll or auto
+   when content exceeds size.
+
    Parameters:
    -----------
 
