@@ -15,7 +15,7 @@
 
      * duration - the duration of the animation
 
-     * tartOffset - the amount of scroll offset after it the animations
+     * startOffset - the amount of scroll offset after it the animations
        kicks in
 
      * offsetY - the offset from the top when the object is animated

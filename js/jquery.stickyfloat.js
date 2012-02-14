@@ -24,11 +24,20 @@
 		return this.each( function() { 
 			var p = $(this).parent();
 
+			// we check each parent for overflow to find valid option to use
+			// for positioning, need better name than base
+			var base = p.parents().map( function() {
+				if ( $(this).css('overflow') == 'scroll' || 
+					 $(this).css('overflow') == 'auto' ) {
+					return this;
+			   	}
+			}).first();
+
 			// might pay to check css('overflow') too but if
 			// scrollHeight not equaling height indicates element
-			// with overflow and scrollbars
-			if ( p.prop('scrollHeight') != p.height() ) {
-				_position_overflow( $(this), options );
+			// with overflow and scrollbars 
+			if ( base.prop('scrollHeight') != base.height() ) {
+				_position_overflow( $(this), options, base );
 			}
 			else {
 				_position($(this), options) 
@@ -79,9 +88,10 @@
 		}; // end calc
 
 		// position when float is inside of overflow with scroll 
-		function _position_overflow($obj, options) {
-			var par              = $obj.parent();
-			var parentPaddingTop = parseInt($obj.parent().css('padding-top'));
+		function _position_overflow($obj, options, p) {
+			// var par              = $obj.parent();
+			// not sure about this yet, if we are inside div > div > div
+			var parentPaddingTop = parseInt( $obj.parent().css('padding-top') );
 			var startOffset      = $obj.parent().offset().top;
 			var opts             = $.extend({
 				startOffset: startOffset, 
@@ -92,7 +102,7 @@
 
 			$obj.css({ position: 'relative' });
 
-			$(par).scroll(function() {
+			$(p).scroll(function() {
 				var newpos = $(this).scrollTop() + opts.offsetY;
 
 				$obj.stop(); 
