@@ -9,8 +9,8 @@
   <link type="text/css" rel="stylesheet" media="all" href="css/style.css" />
 
   <script type="text/javascript">
-    $(function() {
-        $('.stickyfloat').each( function() { $(this).stickyfloat({ duration: 100 }) });
+    $(function() { 
+        $('.stickyfloat').stickyfloat({ duration: 100 }); 
     });
   </script>
 
@@ -54,7 +54,7 @@
 
         <ul>
           <li>duration - the duration of the animation</li>
-          <li>tartOffset - the amount of scroll offset after it the animations kicks in</li>
+          <li>startOffset - the amount of scroll offset after it the animations kicks in</li>
           <li>offsetY - the offset from the top when the object is animated</li>
           <li>lockBottom - 'true' by default, set to false if you don't want your floating box to stop at parent's bottom</li>
         </ul>

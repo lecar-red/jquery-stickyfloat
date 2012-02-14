@@ -21,7 +21,19 @@
  */
 ( function($) {
 	$.fn.stickyfloat = function(options) {
-		return this.each( function() { _position($(this), options) } );
+		return this.each( function() { 
+			var p = $(this).parent();
+
+			// might pay to check css('overflow') too but if
+			// scrollHeight not equaling height indicates element
+			// with overflow and scrollbars
+			if ( p.prop('scrollHeight') != p.height() ) {
+				_position_overflow( $(this), options );
+			}
+			else {
+				_position($(this), options) 
+			}
+		});
 
 		// setup position and scroll
 		function _position($obj, options) {
@@ -31,7 +43,7 @@
 			var opts = $.extend({
 				startOffset: startOffset, 
 				offsetY: parentPaddingTop, 
-				duration: 400, 
+				duration: 400,
 				lockBottom: true 
 			}, options);
 
@@ -65,5 +77,27 @@
 				}
 			});
 		}; // end calc
+
+		// position when float is inside of overflow with scroll 
+		function _position_overflow($obj, options) {
+			var par              = $obj.parent();
+			var parentPaddingTop = parseInt($obj.parent().css('padding-top'));
+			var startOffset      = $obj.parent().offset().top;
+			var opts             = $.extend({
+				startOffset: startOffset, 
+				offsetY:     parentPaddingTop, 
+				duration:    400, 
+				lockBottom:  true 
+			}, options);
+
+			$obj.css({ position: 'relative' });
+
+			$(par).scroll(function() {
+				var newpos = $(this).scrollTop() + opts.offsetY;
+
+				$obj.stop(); 
+				$obj.animate({ top: newpos }, opts.duration );
+			});
+		}
 	};
 })(jQuery);
